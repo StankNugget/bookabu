@@ -10,6 +10,7 @@ Flask = "^2.2.3"
 openai = "^0.27.2"
 Flask-WTF = "^1.1.1"
 WTForms = "^3.0.1"
+Markdown = "^3.4.1"
 
 [tool.poetry.dev-dependencies]
 

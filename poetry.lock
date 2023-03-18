@@ -161,6 +161,17 @@ MarkupSafe = ">=2.0"
 i18n = ["Babel (>=2.7)"]
 
 [[package]]
+name = "markdown"
+version = "3.4.1"
+description = "Python implementation of Markdown."
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.extras]
+testing = ["coverage", "pyyaml"]
+
+[[package]]
 name = "markupsafe"
 version = "2.1.2"
 description = "Safely add untrusted strings to HTML/XML markup."
@@ -286,7 +297,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "f603a525666793fdc1ef9d2ea13a6a19629d95a75626628a12bd30e596c49797"
+content-hash = "46ec82bd4aad6a75787da29cf65271557085f163fb1cb969401038f83ed996cb"
 
 [metadata.files]
 aiohttp = []
@@ -303,6 +314,7 @@ frozenlist = []
 idna = []
 itsdangerous = []
 jinja2 = []
+markdown = []
 markupsafe = []
 multidict = []
 openai = []

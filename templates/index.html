@@ -3,19 +3,21 @@
   <head>
     <title>Real Estate PRO</title>
     <style>
-      body {
+            body {
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 0;
         background-color: #f6f6f6;
+      }
+      header {
+        background: linear-gradient(to right, #3a8cc8, #00bcd4);
       }
       h1 {
         font-size: 36px;
         font-weight: normal;
         margin: 0;
         text-align: center;
-        color: #000000;
-        background-image: url('house.png');
+        color: #ffffff;
         background-repeat: no-repeat;
         background-size: 50px;
         background-position: center;
@@ -70,25 +72,71 @@
         font-size: 16px;
         line-height: 1.5;
         margin: 0;
+        margin-bottom: 1em;
+      }
+       .content-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1px;
+       }
+          .word-textbox {
+        background-color: #ffffff;
+        border: 1px solid #dfe1e5;
+        border-radius: 4px;
+        padding: 20px;
+        width: 80%;
+        height: 800px; /* added this line to increase the height */
+        margin: 0 auto;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        font-family: "Calibri", Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+        overflow-wrap: break-word;
+        resize: none;
+      }
+      .word-textbox[contentEditable] {
+        white-space: pre-wrap;
       }
     </style>
+    <script>
+      function toAPStyle(text) {
+        // Add your rules for converting to AP writing style here.
+        // This is a basic example and may not cover all aspects of AP writing style.
+        return text.replace(/(Mr\.|Mrs\.|Ms\.)\s+([A-Z])/g, '$1 $2');
+      }
+
+      function removeHTMLTags(str) {
+        return str.replace(/<\/?[^>]+(>|$)/g, "");
+      }
+    </script>
   </head>
   <body>
     <header>
       <h1>Real Estate PRO</h1>
     </header>
     <main>
-       <form method="post">
-        {{ form.csrf_token }}
-        <label for="{{ form.user_input.id }}">{{ form.user_input.label.text }}</label>
-        {{ form.user_input(id=form.user_input.id, class_="input-field") }}
-        {{ form.submit(class_="submit-button") }}
-      </form>
-      {% if response %}
-      <hr>
-      <h3>Response:</h3>
-      <p>{{ response }}</p>
-      {% endif %}
+      <div class="content-container">
+        <form method="post">
+          {{ form.csrf_token }}
+          <label for="{{ form.user_input.id }}">{{ form.user_input.label.text }}</label>
+          {{ form.user_input(id=form.user_input.id, class_="input-field") }}
+          {{ form.submit(class_="submit-button") }}
+        </form>
+        {% if response %}
+        <hr>
+        <h3>Response:</h3>
+        <div class="word-textbox" id="response-textbox" contentEditable="false"></div>
+        <script>
+          let originalQuestion = {{ form.user_input.data|tojson }};
+          let originalResponse = {{ response|tojson }};
+          let cleanedResponse = removeHTMLTags(originalResponse);
+          let apStyleResponse = toAPStyle(cleanedResponse);
+          document.getElementById("response-textbox").innerHTML = `<strong>Question:</strong> ${originalQuestion}<br><br>` + `<strong>Answer:</strong> ${apStyleResponse}`;
+        </script>
+        {% endif %}
+      </div>
     </main>
   </body>
 </html>
