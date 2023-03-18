@@ -12,7 +12,7 @@ csrf = CSRFProtect(app)
 
 logging.basicConfig(level=logging.DEBUG)
 
-openai.api_key = "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"
+openai.api_key = os.environ.get('OPENAI_API_KEY')
 
 messages = [{"role": "system", "content": "You are a real estate guru"}]
 
