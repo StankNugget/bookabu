@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Real Estate PRO</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f6f6f6;
+      }
+      h1 {
+        font-size: 36px;
+        font-weight: normal;
+        margin: 0;
+        text-align: center;
+        color: #000000;
+        background-image: url('house.png');
+        background-repeat: no-repeat;
+        background-size: 50px;
+        background-position: center;
+        padding: 80px 0;
+      }
+      form {
+        margin: 20px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      label {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+      input[type="text"] {
+        border: none;
+        border-bottom: 1px solid #dfe1e5;
+        padding: 10px;
+        font-size: 16px;
+        width: 300px;
+        margin-bottom: 20px;
+      }
+      input[type="text"]:focus {
+        outline: none;
+        border-bottom: 2px solid #4285f4;
+      }
+      button[type="submit"] {
+        background-color: #4285f4;
+        border: none;
+        color: #fff;
+        font-size: 16px;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      button[type="submit"]:hover {
+        background-color: #357ae8;
+      }
+      hr {
+        border: none;
+        border-top: 1px solid #dfe1e5;
+        margin: 20px 0;
+      }
+      h3 {
+        font-size: 24px;
+        font-weight: normal;
+        margin: 20px 0;
+      }
+      p {
+        font-size: 16px;
+        line-height: 1.5;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Real Estate PRO</h1>
+    </header>
+    <main>
+       <form method="post">
+        {{ form.csrf_token }}
+        <label for="{{ form.user_input.id }}">{{ form.user_input.label.text }}</label>
+        {{ form.user_input(id=form.user_input.id, class_="input-field") }}
+        {{ form.submit(class_="submit-button") }}
+      </form>
+      {% if response %}
+      <hr>
+      <h3>Response:</h3>
+      <p>{{ response }}</p>
+      {% endif %}
+    </main>
+  </body>
+</html>
