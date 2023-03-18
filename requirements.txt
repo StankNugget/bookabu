@@ -1,6 +1,5 @@
 Flask
 gunicorn
-openai
 os
 logging
 markdown
