@@ -15,4 +15,4 @@ COPY . .
 EXPOSE 80
 
 # Start the application
-CMD ["python", "app.py"]
+CMD ["python", "main.py"]
