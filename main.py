@@ -14,13 +14,18 @@ logging.basicConfig(level=logging.DEBUG)
 
 openai.api_key = os.environ.get('OPENAI_API_KEY')
 
-messages = [{"role": "system", "content": "You are a real estate guru"}]
+def init_conversation():
+    return [{"role": "system", "content": "You are a real estate guru"}]
+
+messages = init_conversation()
 
 class InputForm(FlaskForm):
     user_input = StringField('Your question:')
     submit = SubmitField('Submit')
 
 def CustomChatGPT(user_input):
+    global messages
+    messages = init_conversation()
     messages.append({"role": "user", "content": user_input})
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
@@ -42,4 +47,3 @@ def index():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 80)))
-
