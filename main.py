@@ -7,7 +7,7 @@ from flask_wtf import FlaskForm, CSRFProtect
 from wtforms import StringField, SubmitField
 
 app = Flask(__name__, template_folder='templates')
-app.config['SECRET_KEY'] = '\xa9G:-\x9c\xc4\xa4\x85\xa5\x18\xd8UL\x84\xc6\xdd\x18\xbd2:F\xe3\x91'
+app.config['SECRET_KEY'] = os.environ.get("FLASK_SECRET_KEY")
 csrf = CSRFProtect(app)
 
 logging.basicConfig(level=logging.DEBUG)
@@ -15,7 +15,7 @@ logging.basicConfig(level=logging.DEBUG)
 openai.api_key = os.environ.get('OPENAI_API_KEY')
 
 def init_conversation():
-    return [{"role": "system", "content": "You are a real estate guru"}]
+    return [{"role": "system", "content": "You are a real estate guru. refrain from referring to yourself in any instance"}]
 
 messages = init_conversation()
 
